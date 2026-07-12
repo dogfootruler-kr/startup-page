@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#1d2d44" />
-  <meta name="description" content="startpage components" />
-  <link rel="shortcut icon" href="https://dogfootruler-kr.github.io/startup-page/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="76x76" href="https://dogfootruler-kr.github.io/startup-page/apple-icon.png" />
-  <!--
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1d2d44" />
+    <meta
+      name="description"
+      content="startpage components"
+    />
+    <link rel="shortcut icon" href="https://dogfootruler-kr.github.io/startup-page/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="https://dogfootruler-kr.github.io/startup-page/apple-icon.png"
+    />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="https://dogfootruler-kr.github.io/startup-page/manifest.json" />
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -16,17 +27,49 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>Start Page</title>
-  
-  
-  <script type="module" crossorigin src="https://dogfootruler-kr.github.io/startup-page/assets/index.85c60647.js"></script>
-  <link rel="stylesheet" href="https://dogfootruler-kr.github.io/startup-page/assets/index.50317b4a.css">
-</head>
+    <title>Start Page</title>
+    <script>
+      (function () {
+        // Suppress ResizeObserver loop errors — benign WebGL canvas resize
+        // artifacts that can trigger Vite's error overlay in dev mode.
+        window.addEventListener('error', function (e) {
+          if (e.message && e.message.includes('ResizeObserver')) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
 
-<body class="text-blueGray-100 antialiased">
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
+        // Apply theme before React renders to eliminate flash of unstyled content.
+        try {
+          var mode = null, palette = null;
+          var raw = localStorage.getItem('startup-page.settings');
+          if (raw) {
+            var p = JSON.parse(raw);
+            mode = (p && p.ui && p.ui.themeMode) || null;
+            palette = (p && p.ui && p.ui.themePalette) || null;
+          }
+          if (!mode) mode = localStorage.getItem('color-theme-mode');
+          if (!palette) palette = localStorage.getItem('color-theme-palette');
+          palette = palette || 'zen';
+          var resolved = mode === 'dark' ? 'dark'
+            : mode === 'light' ? 'light'
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.add(resolved);
+          document.documentElement.dataset.theme = palette;
+        } catch (_) {}
+      })();
+    </script>
+    <script type="module" crossorigin src="https://dogfootruler-kr.github.io/startup-page/assets/index-Ck7uviu8.js"></script>
+    <link rel="modulepreload" crossorigin href="https://dogfootruler-kr.github.io/startup-page/assets/rolldown-runtime-BYbx6iT9.js">
+    <link rel="modulepreload" crossorigin href="https://dogfootruler-kr.github.io/startup-page/assets/vendor-react-BHQt1cwJ.js">
+    <link rel="modulepreload" crossorigin href="https://dogfootruler-kr.github.io/startup-page/assets/vendor-ui-BYBPdF2F.js">
+    <link rel="modulepreload" crossorigin href="https://dogfootruler-kr.github.io/startup-page/assets/settings-RicL30Ey.js">
+    <link rel="stylesheet" crossorigin href="https://dogfootruler-kr.github.io/startup-page/assets/index-CpBjIyTm.css">
+  </head>
+  <body class="text-blueGray-100 antialiased">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
       You can add webfonts, meta tags, or analytics to this file.
@@ -34,6 +77,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
-
+  </body>
 </html>

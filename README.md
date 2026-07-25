@@ -76,6 +76,7 @@ There is no config file to edit manually.
 - **Responsive tile grid** — column count adjusts to viewport width; tile size is adjustable via a slider in Settings → Layout (7–14 rem)
 - **Tile visibility** — show or hide any tile from Settings → Layout without losing its position
 - **Command palette** — press `⌘K` / `Ctrl+K` to navigate the dashboard by keyboard (powered by kbar)
+- **AI chat launcher** — floating button (bottom-right) that opens Claude or ChatGPT in a popup or tab, optionally prefilled with a prompt. Uses your existing browser login/subscription — no API key. Configure in Settings → Content → AI Chat.
 
 ### Tiles
 

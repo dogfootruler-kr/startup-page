@@ -198,6 +198,11 @@
     "rssFeedUrl": null,
     "spotifyClientId": null
   },
+  "aiChat": {
+    "enabled": true,
+    "provider": "claude",
+    "openIn": "popup"
+  },
   "search": {
     "engines": [
       { "id": "google", "name": "Google", "url": "https://www.google.com/search?q=", "icon": "google" },

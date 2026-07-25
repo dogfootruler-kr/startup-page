@@ -6,6 +6,7 @@ import {
   SEARCH_ICON_OPTIONS,
   getSearchEngineIcon,
 } from "@/features/dashboard/searchEngines";
+import { AI_CHAT_PROVIDERS } from "@/features/aiChat/constants";
 
 import { ThemeContext } from "@/components/layout/ThemeContext";
 import { Button } from "@/components/ui/button";
@@ -181,6 +182,16 @@ function SettingsButton() {
       ...prevSettings,
       timer: {
         ...prevSettings.timer,
+        [key]: value,
+      },
+    }));
+  };
+
+  const handleAiChatChange = (key, value) => {
+    updateSettings((prevSettings) => ({
+      ...prevSettings,
+      aiChat: {
+        ...prevSettings.aiChat,
         [key]: value,
       },
     }));
@@ -1042,6 +1053,53 @@ function SettingsButton() {
                         }
                       />
                     </SettingField>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>AI Chat</CardTitle>
+                    <CardDescription>
+                      Floating button that opens Claude or ChatGPT with your own browser login — no API key needed.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="font-medium">Show floating chat button</p>
+                        <p className="text-sm text-muted-foreground">Appears in the bottom-right corner of every page.</p>
+                      </div>
+                      <Switch
+                        checked={settingsState.aiChat?.enabled ?? true}
+                        onCheckedChange={(checked) => handleAiChatChange("enabled", checked)}
+                      />
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <div className="grid gap-3">
+                        <Label className="text-xs font-medium text-foreground">Default assistant</Label>
+                        {AI_CHAT_PROVIDERS.map((provider) => (
+                          <ChoiceButton
+                            key={provider.id}
+                            selected={(settingsState.aiChat?.provider ?? "claude") === provider.id}
+                            title={provider.name}
+                            description={provider.id === "claude" ? "claude.ai — uses your Claude subscription." : "chatgpt.com — uses your ChatGPT subscription."}
+                            onClick={() => handleAiChatChange("provider", provider.id)}
+                          />
+                        ))}
+                      </div>
+                      <div className="grid gap-3">
+                        <Label className="text-xs font-medium text-foreground">Open chats in</Label>
+                        {["popup", "tab"].map((value) => (
+                          <ChoiceButton
+                            key={value}
+                            selected={(settingsState.aiChat?.openIn ?? "popup") === value}
+                            title={value === "popup" ? "Popup window" : "New tab"}
+                            description={value === "popup" ? "Small chat window next to the dashboard." : "Regular full-size browser tab."}
+                            onClick={() => handleAiChatChange("openIn", value)}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
 

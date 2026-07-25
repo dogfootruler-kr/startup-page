@@ -9,6 +9,7 @@ import { useLayoutEditStore } from "@/features/dashboard/stores/layoutEditStore"
 import ThemeProvider, { ThemeContext, type ThemeMode } from "@/components/layout/ThemeContext";
 import Toggle from "@/components/layout/ThemeToggle";
 import SettingsButton from "@/features/settings/components/SettingsButton";
+import AiChatLauncher from "@/features/aiChat/components/AiChatLauncher";
 import CommandPalette from "@/components/layout/CommandPalette";
 import useKBarActions from "@/features/dashboard/hooks/useKBarActions";
 import DashboardPage from "@/features/dashboard/pages";
@@ -241,6 +242,7 @@ function AppLayoutInner() {
         <DashboardPage />
       </div>
       {!isDashboard && <Outlet />}
+      <AiChatLauncher />
     </section>
   );
 }
